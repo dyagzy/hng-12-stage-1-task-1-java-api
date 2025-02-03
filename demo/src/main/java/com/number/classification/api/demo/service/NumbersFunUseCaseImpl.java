@@ -57,18 +57,15 @@ public class NumbersFunUseCaseImpl implements NumbersFunUseCase {
 
   @Override
   public FunFactDTO getFunFactNumber(int number) {
-    var funFactDTO = new FunFactDTO();
-
     String numbersUrl = String.format("http://numbersapi.com/%d/math", number);
     var funNumber = restClient.getForObject(numbersUrl, String.class);
-    funFactDTO.setNumber(number);
-    funFactDTO.set_prime(isPrimeNumber(number));
-    funFactDTO.set_perfect(isPerfectNumber(number));
-    funFactDTO.setProperties(validateArmstrong(number));
-    funFactDTO.setDigit_sum(sumDigits(number));
-    funFactDTO.setFun_fact(funNumber);
-
-    return funFactDTO;
+    return new FunFactDTO(
+        number,
+        isPrimeNumber(number),
+        isPerfectNumber(number),
+        validateArmstrong(number),
+        sumDigits(number),
+        funNumber);
   }
 
   boolean isPrimeNumber(int number) {
