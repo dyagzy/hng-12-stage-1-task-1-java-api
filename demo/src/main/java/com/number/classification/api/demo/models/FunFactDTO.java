@@ -2,14 +2,14 @@ package com.number.classification.api.demo.models;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@Data
 public class FunFactDTO {
   private int number;
   private boolean is_prime;

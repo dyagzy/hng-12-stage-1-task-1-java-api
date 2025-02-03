@@ -2,6 +2,8 @@ package com.number.classification.api.demo.controllers;
 
 import com.number.classification.api.demo.service.NumbersFunUseCase;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,9 +23,9 @@ public class NumbersFunApiController {
   }
 
   @GetMapping("/{number}")
-  public ResponseEntity<Object> getNumbersFun(@PathVariable int number) {
+  public ResponseEntity<Object> getNumbersFun(@PathVariable String number) {
     if (isValidNumber(number)) {
-      return ResponseEntity.ok(numbersFunUseCase.getFunFactNumber(number));
+      return ResponseEntity.ok(numbersFunUseCase.getFunFactNumber(Integer.parseInt(number)));
     }
     else{
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new BadRequestResponse(number, true));
@@ -31,13 +33,16 @@ public class NumbersFunApiController {
 
   }
 
-  private boolean isValidNumber(double number) {
-    return number == Math.floor(number) && number >= 0;
-  }
 
   @AllArgsConstructor
+  @Data
   private static class BadRequestResponse {
-    private double number;
+    private String number;
     private boolean isBadRequest;
+  }
+
+  private boolean isValidNumber(String number) {
+
+    return number.matches("\\d+");
   }
 }
