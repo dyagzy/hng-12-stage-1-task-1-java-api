@@ -25,13 +25,14 @@ public class NumbersFunApiController {
   public ResponseEntity<Object> getNumbersFun(
       @RequestParam(value = "number", required = false) String number) {
     if (number == null || number.isEmpty()) {
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body(new BadRequestResponse(number, "true"));
     }
     if (isValidNumber(number)) {
       return ResponseEntity.ok(numbersFunUseCase.getFunFactNumber(Integer.parseInt(number)));
     } else {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-          .body(new BadRequestResponse(number, true));
+          .body(new BadRequestResponse(number, "true"));
     }
   }
 
@@ -44,7 +45,7 @@ public class NumbersFunApiController {
   @Data
   private static class BadRequestResponse {
     private String number;
-    private boolean isBadRequest;
+    private String isBadRequest;
   }
 }
 
