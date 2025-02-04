@@ -22,7 +22,11 @@ public class NumbersFunApiController {
   }
 
   @GetMapping
-  public ResponseEntity<Object> getNumbersFun(@RequestParam("number") String number) {
+  public ResponseEntity<Object> getNumbersFun(
+      @RequestParam(value = "number", required = false) String number) {
+    if (number == null || number.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
     if (isValidNumber(number)) {
       return ResponseEntity.ok(numbersFunUseCase.getFunFactNumber(Integer.parseInt(number)));
     } else {
@@ -43,3 +47,9 @@ public class NumbersFunApiController {
     private boolean isBadRequest;
   }
 }
+
+//
+// (@RequestParam(value = "number", required = false) String numberParam) {
+//    if (numberParam == null || numberParam.isEmpty()) {
+//    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("number", "Missing
+// 'number' parameter"));
