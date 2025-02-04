@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,8 +23,8 @@ public class NumbersFunApiController {
     this.numbersFunUseCase = numbersFunUseCase1;
   }
 
-  @GetMapping("/{number}")
-  public ResponseEntity<Object> getNumbersFun(@PathVariable String number) {
+  @GetMapping
+  public ResponseEntity<Object> getNumbersFun(@RequestParam String number) {
     if (isValidNumber(number)) {
       return ResponseEntity.ok(numbersFunUseCase.getFunFactNumber(Integer.parseInt(number)));
     }
