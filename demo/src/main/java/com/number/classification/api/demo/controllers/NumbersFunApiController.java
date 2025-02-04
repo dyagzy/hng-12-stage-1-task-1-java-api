@@ -38,7 +38,7 @@ public class NumbersFunApiController {
 
   private boolean isValidNumber(String number) {
 
-    return number.matches("\\d+");
+    return number.matches("-?\\d+(\\.\\d+)?");// checks for alphabets, special characters and decimals
   }
 
   @AllArgsConstructor
@@ -49,8 +49,3 @@ public class NumbersFunApiController {
   }
 }
 
-//
-// (@RequestParam(value = "number", required = false) String numberParam) {
-//    if (numberParam == null || numberParam.isEmpty()) {
-//    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("number", "Missing
-// 'number' parameter"));
