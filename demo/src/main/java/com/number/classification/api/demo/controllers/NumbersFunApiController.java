@@ -45,7 +45,7 @@ public class NumbersFunApiController {
   @Data
   private static class BadRequestResponse {
     private String number;
-    private String isBadRequest;
+    private String error;
   }
 }
 
