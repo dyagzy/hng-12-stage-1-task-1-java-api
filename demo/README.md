@@ -11,6 +11,6 @@ Running the Project
 
 go to the terminal and run : mvn spring-boot:run
 
-Endpoint URL: http://localhost:8080/ </br>
+Endpoint URL: http://localhost:8080/api/numbers/42</br>
 
 Backlink: https://hng.tech/hire/java-developers
